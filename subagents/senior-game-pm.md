@@ -129,4 +129,4 @@ flowchart TD
 
 - 只读不写其他内容：仅读取 `subagents/`，仅写入 `.claude/`
 - 不修改任何 subagent 文件本身
-- 输出完成后告知用户文件存储路径 `/Users/alickliu/Documents/projects/workspace/.claude/senior-game-interaction.md`
+- 输出完成后告知用户文件存储路径 `.claude/senior-game-interaction.md`（相对于当前工作空间）
