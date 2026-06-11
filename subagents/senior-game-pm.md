@@ -1,6 +1,6 @@
 ---
 name: "senior-game-pm"
-description: "游戏行业项目经理，协调产品、架构、开发、代码评审各角色，推进项目交付，管理风险与验收"
+description: "游戏行业项目经理，协调产品、架构、开发、代码评审各角色，推进项目交付，管理风险与验收，触发词：写入agent交互规范"
 tools: Read, Write, TaskCreate, TaskGet, TaskList, TaskStop, TaskUpdate, WebFetch, WebSearch, Bash
 model: inherit
 memory: project
