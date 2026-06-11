@@ -21,7 +21,7 @@ description: 对文件夹内的 PNG/JPG 图片裁剪为 64×64、128×128、192�
    - 确认文件夹内有 `.png` / `.jpg` 文件（支持大小写后缀）
 
 2. **执行裁剪脚本**
-   - 运行 `bash scripts/linkgame-cropper.sh [目标路径]`
+   - 运行 `bash skills/linkgame-cropper/linkgame-cropper.sh [目标路径]`
    - 脚本行为：
      - 自动检测 ImageMagick，未安装则通过 Homebrew 安装
      - 跳过已裁剪过的文件（文件名含 `64@1x` / `64@2x` / `64@3x` 后缀）
