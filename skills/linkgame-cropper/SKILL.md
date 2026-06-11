@@ -18,10 +18,5 @@ description: 对文件夹内的 PNG/JPG 图片裁剪为 64×64、128×128、192�
 ## 工作流程
 1. 确认目标文件夹，默认使用当前目录。
 2. 扫描文件夹内的 `.png` / `.jpg` / `.jpeg` 文件（支持大小写后缀）。
-3. 对每个未处理的原始图片执行裁剪脚本。
+3. 执行 skill 自带的 `scripts/linkgame-cropper.sh` 脚本，传入目标路径参数。
 4. 输出处理结果，列出生成的图片文件。
-
-## 执行方式
-```bash
-bash skills/linkgame-cropper/scripts/linkgame-cropper.sh [目标路径]
-```
