@@ -13,7 +13,7 @@ description: 对文件夹内的 PNG/JPG 图片裁剪为 64×64、128×128、192�
 2. **命名规范**：在原始文件名后追加 `64@1x`、`64@2x`、`64@3x`（如 `abc.png` → `abc64@1x.png`）。
 3. **跳过已裁剪**：文件名已含 `64@1x` / `64@2x` / `64@3x` 后缀的文件不处理。
 4. **居中裁剪**：使用 `-resize 尺寸^ -gravity center -extent 尺寸` 进行居中裁剪。
-5. **依赖检查**：先确认 ImageMagick 已安装，未安装则通过 Homebrew 安装。
+5. **依赖检查**：先确认 ImageMagick 已安装，未安装则根据当前平台自动通过包管理器安装（macOS → Homebrew，Linux → apt/yum/dnf/pacman，Windows → choco/winget/scoop）。
 
 ## 工作流程
 1. 确认目标文件夹，默认使用当前目录。

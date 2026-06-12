@@ -6,23 +6,27 @@
       "Write(*)",
       "Edit(*)",
       "MultiEdit(*)",
+
       "Bash(git status)",
       "Bash(git diff)",
       "Bash(git add *)",
+      "Bash(git push *)",
+      "Bash(git push --force *)",
       "Bash(find)",
       "Bash(cd *)",
       "Bash(sleep *)",
       "Bash(curl *)",
+
       "Bash(npm *)",
       "Bash(npx *)",
       "Bash(node *)",
       "Bash(python3 *)",
       "Bash(yarn *)",
       "Bash(pnpm *)",
+
       "Bash(chmod)",
       "Bash(ln -sf *)",
-      "Bash(git push *)",
-      "Bash(git push --force *)",
+
       "Bash(head *)",
       "Bash(tail *)",
       "Bash(cat *)",
@@ -32,6 +36,7 @@
       "Bash(wc *)",
       "Bash(sort *)",
       "Bash(cut *)",
+
       "Bash(pwd)",
       "Bash(date)",
       "Bash(which *)",
@@ -70,7 +75,31 @@
       "Bash(uname *)",
       "Bash(sw_vers)",
       "Bash(sysctl *)",
-      "Bash(diskutil *)"
+      "Bash(diskutil *)",
+
+      "WebSearch",
+
+      "Bash(application-use *)",
+      "Bash(auto-feedback *)",
+      "Bash(playwright-spatial-layout-mcp *)",
+      "Bash(agent-computer *)",
+      "Bash(npx @saifulapm/layoutlint *)",
+      "Bash(npx playwright *)",
+      "Bash(npx playwright install *)",
+      "Bash(npx playwright install chromium *)",
+      "Bash(npx playwright install firefox *)",
+      "Bash(npx playwright install webkit *)",
+      "Bash(npx hasna-computer *)",
+      "Bash(npx computer-control-mcp *)",
+      "Bash(npx macos-mcp-server *)",
+
+      "Bash(skills/application-use-initializer/scripts/setup-auto-feedback-mcp.sh)",
+      "Bash(skills/application-use-initializer/scripts/setup-playwright-spatial-layout-mcp.sh)",
+      "Bash(skills/application-use-initializer/scripts/setup-agent-computer-mcp.sh)",
+      "Bash(skills/application-use-initializer/scripts/setup-application-use.sh)",
+      "Bash(skills/application-use-initializer/scripts/setup-layoutlint.sh)",
+      "Bash(skills/application-use-initializer/scripts/setup-playwright.sh)",
+      "Bash(skills/application-use-initializer/scripts/install-tools.sh)"
     ],
     "ask": [
       "Bash(git commit *)"
