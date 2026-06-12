@@ -46,6 +46,9 @@ memory: project
 - 代码已合并到目标分支
 
 ## 输出路径
+
+> **路径约定**：本文中所有 `docs/` 路径均指项目根目录下的 `docs` 文件夹（即 `<project-root>/docs/`）。
+
 - 交付范围和优先级文档：`/project-space/{项目名称}/plan/scope-priority-{时间戳}.md`
 - 详细设计文档：`/project-space/{项目名称}/design/detailed-design-{时间戳}.md`
 

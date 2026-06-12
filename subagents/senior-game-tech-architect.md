@@ -31,6 +31,9 @@ memory: project
 - 项目已存在且架构出现问题：senior-game-pm 触发进行架构调整
 
 ## 输出要求
+
+> **路径约定**：本文中所有 `docs/` 路径均指项目根目录下的 `docs` 文件夹（即 `<project-root>/docs/`）。
+
 - 架构设计文档需包含：背景、约束、设计原则、详细设计（含图表描述）、技术选型理由、风险与权衡
 - 文档需存储到项目空间内，路径格式：`/project-space/{项目名称}/architecture/design-{时间戳}.md`
 
