@@ -62,6 +62,17 @@ memory: project
 
 > **工具安装策略**：如果上述工具未在当前环境检测到，优先调用 `application-use-initializer` 技能进行安装。如果该技能不可用，则自行通过 `npm install -g` 或 `npx` 方式安装对应工具。
 
+## 测试工具分析约束
+
+在测试执行过程中，必须遵循以下工具分析规则：
+
+1. **独立分析**：依据已编写好的测试用例，自行分析需要哪些测试工具（如：涉及 Web 页面则需 Playwright、涉及 API 则需 api-testing-mcp 等）
+2. **对比校验**：将你的工具分析结果与 PM（senior-game-pm）或需求发起方指定的工具清单进行对比
+3. **冲突处理**：如果你的分析与 PM/发起方不一致（如：你认为需要 Playwright 但 PM 指定用 auto-feedback），**不得自行决定**，必须暂停并询问用户"当前 PM/发起方指定的工具有冲突，请确认使用哪个工具"
+4. **记录依赖**：确认后的工具选择需在测试报告中注明
+
+> **目的**：避免因工具选型偏差导致测试结果不被认可，确保测试工具的使用与项目预期一致。
+
 ## 测试用例编写规范
 
 ### 测试用例文件格式
@@ -132,6 +143,18 @@ memory: project
 |:--------:|:--------:|:--------:|:--------:|:-----------:|
 | BUG-001  | {问题描述} | {模块} | {级别} | {建议方案} |
 
+## 测试截图（前端交互 / 功能测试）
+
+- **截图存储路径**：`docs/test/reports/screenshots/{功能模块}_{YYYYMMDD}/`
+- **截图命名格式**：`{用例ID}_{场景简述}_{序号}.png`
+- **截图要求**：
+  - 每一条涉及前端交互或功能测试的用例，必须至少附带 1 张关键步骤截图
+  - 截图应清晰展示操作结果或界面状态
+  - 在测试报告中通过 `![截图描述](../screenshots/{功能模块}_{YYYYMMDD}/{用例ID}_{场景简述}_{序号}.png)` 嵌入
+- **示例**：
+  - `docs/test/reports/screenshots/login_module_20260612/TC-001_正常登录_1.png`
+  - 报告中引用：`![登录成功页面](../screenshots/login_module_20260612/TC-001_正常登录_1.png)`
+
 ## 测试结论
 
 - **通过条件**：S0、P1 级别用例通过率100%
@@ -144,14 +167,21 @@ memory: project
 - 命名格式：`{功能模块}_test_report_{YYYYMMDD}.md`
 - 示例：`login_module_test_report_20260612.md`、`game_core_test_report_20260612.md`
 
+### 截图文件命名规范
+- 存储路径：`docs/test/reports/screenshots/{功能模块}_{YYYYMMDD}/`
+- 命名格式：`{用例ID}_{场景简述}_{序号}.png`
+- 说明：`{功能模块}` 与 `{YYYYMMDD}` 拼接为目录名，不同日期的同一模块测试截图自动分目录存放，互不干扰
+- 示例：`screenshots/login_module_20260612/TC-001_正常登录_1.png`、`screenshots/game_core_20260613/TC-005_开始游戏_1.png`
+
 ## 测试执行流程
 1. 确认测试目标和范围（从PM或设计文档获取）
 2. 编写测试用例 → 输出到 `docs/test/cases/`
 3. 检查所需测试工具是否可用，缺失则调用 `application-use-initializer` 安装
 4. 按优先级从高到低执行测试（S0 → P1 → P2 → P3）
-5. 记录测试结果，更新测试用例状态
-6. 汇总测试报告 → 输出到 `docs/test/reports/`
-7. 将测试报告同步给 senior-game-pm 和相关方
+5. **截图记录**：对于涉及前端交互或功能测试的用例，在执行过程中使用对应测试工具（如 Playwright、auto-feedback）截取关键步骤截图，保存至 `docs/test/reports/screenshots/{功能模块}_{YYYYMMDD}/`，不同模块、不同日期的截图存放于各自独立目录
+6. 记录测试结果，更新测试用例状态
+7. 汇总测试报告 → 输出到 `docs/test/reports/`，并在报告中嵌入截图引用
+8. 将测试报告同步给 senior-game-pm 和相关方
 
 ## 前端Web组件变更检测规则
 
