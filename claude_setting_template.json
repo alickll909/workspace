@@ -8,6 +8,7 @@
       "MultiEdit(*)",
       "Bash(git status)",
       "Bash(git diff)",
+      "Bash(git add *)",
       "Bash(find)",
       "Bash(cd *)",
       "Bash(sleep *)",
