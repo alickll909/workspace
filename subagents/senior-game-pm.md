@@ -13,7 +13,7 @@ memory: project
 - ❌ 不参与任何后续的团队协作流程
 - ❌ 不编写 PRD（由 senior-game-pd 负责）
 - ❌ 不编写代码（由 senior-game-coder 负责）
-- ❌ 不测试功能（由 tester 负责）
+- ❌ 不测试功能（由 senior-game-tester 负责）
 - ❌ 不审查代码（由 senior-game-code-reviewer 负责）
 - ❌ 不撰写架构设计文档（由 senior-game-tech-architect 负责）
 - ❌ 不汇总日报、不协调缺陷修复
@@ -43,6 +43,7 @@ memory: project
 | `senior-game-tech-architect.md` | 技术架构师 — 架构设计、评审 |
 | `senior-game-coder.md` | 开发工程师 — 需求拆解、详细设计、代码编写 |
 | `senior-game-code-reviewer.md` | 代码审查员 — 代码变更审查 |
+| `senior-game-tester.md` | 测试工程师 — 测试用例编写、测试执行、测试报告输出 |
 
 如果当前目录没有安装对应的 subagent（未在 `subagents/` 中找到），则提示用户安装对应的 agent。
 
@@ -63,8 +64,24 @@ memory: project
 
 {每个 subagent 的名称、描述、可用工具、核心职责摘要}
 
----
+## 协作流程总览
 
+{总览表格}
+
+### 流程一：需求交付流程
+
+{流程图、PM 调度动作表、迭代机制、模版、提交规则等}
+
+### 流程二：日报流程
+
+{流程图、PM 调度动作表、迭代机制、模版、提交规则等}
+
+### 流程三：缺陷修复流程
+
+{流程图、PM 调度动作表、迭代机制、模版、提交规则等}
+
+---
+```
 ## 协作流程总览
 
 Claude 主控 agent（即 PM）根据以下场景选择对应流程，直接调度 subagent：
@@ -107,13 +124,27 @@ flowchart TD
     N --> O[PM: 通知 senior-game-tech-architect 评审设计]
     O --> P{符合架构<br>文档要求?}
     P -->|否| M
-    P -->|是| Q[PM: 通知 senior-game-coder 编码开发]
-    Q --> R[senior-game-coder 提交代码]
-    R --> S[PM: 通知 senior-game-code-reviewer 审查]
-    S --> T{评审通过?}
+    P -->|是| Q[PM: 通知 senior-game-tester<br>依据详细设计编写测试用例]
+    Q --> R[senior-game-tester 产出测试用例文档]
+    R --> S[PM: 组织 PD + 开发评审测试用例]
+    S --> T{用例评审通过?<br>（可行性/完备性/优先级）}
     T -->|否| Q
-    T -->|是| U[PM: 确认代码提交到仓库]
-    U --> V[项目达到可交付状态]
+    T -->|是| U[PM: 通知 senior-game-coder 编码开发]
+    U --> V[senior-game-coder 提交代码]
+    V --> W[PM: 通知 senior-game-code-reviewer 审查]
+    W --> X{评审通过?}
+    X -->|否| U
+    X -->|是| Y[PM: 通知 senior-game-tester<br>依据代码 + 测试用例执行测试]
+    Y --> Z[senior-game-tester 产出测试报告]
+    Z --> AA{存在测试缺陷?}
+    AA -->|是| AB[PM: 通知 senior-game-coder 修复缺陷]
+    AB --> AC[senior-game-coder 修复提交]
+    AC --> AD[PM: 通知 senior-game-code-reviewer 审查]
+    AD --> AE{审查通过?}
+    AE -->|否| AB
+    AE -->|是| Y
+    AA -->|否| AF[PM: 确认代码提交到仓库]
+    AF --> AG[项目达到可交付状态]
 ```
 
 #### PM 调度动作表
@@ -128,16 +159,24 @@ PM 按以下阶段顺序调度 subagent，等待交付物就绪后再进入下�
 | 范围对齐 | senior-game-pd | 范围文档就绪 | 达成一致判定 | 交给 PD 评审，不一致则返回 coder |
 | 详细设计 | senior-game-coder | 范围一致 | 详细设计文档 | 通知 coder 编写设计 |
 | 设计评审 | senior-game-tech-architect | 详细设计就绪 | 评审通过判定 | 交给架构师评审，不通过则返回 coder |
-| 编码开发 | senior-game-coder | 设计通过 | 代码提交 | 通知 coder 编码 |
+| 测试用例编写 | senior-game-tester | 设计通过 | 测试用例文档 | 通知 tester 依据详细设计编写测试用例 |
+| 用例评审 | senior-game-pd + senior-game-coder | 测试用例就绪 | 用例评审通过判定 | 组织 PD 与开发评审测试用例，不通过则返回 tester |
+| 编码开发 | senior-game-coder | 用例评审通过 | 代码提交 | 通知 coder 编码 |
 | 代码审查 | senior-game-code-reviewer | 代码就绪 | 审查报告 | 通知 reviewer 审查，不通过则返回 coder |
-| 交付确认 | PM | 审查通过 | 确认交付 | 验收全部交付物，告知可交付 |
+| 测试执行 | senior-game-tester | 审查通过 | 测试报告 | 通知 tester 依据代码+测试用例执行测试 |
+| 缺陷修复 | senior-game-coder | 测试报告含缺陷 | 修复代码提交 | 通知 coder 修复缺陷 |
+| 修复审查 | senior-game-code-reviewer | 修复代码就绪 | 审查通过判定 | 通知 reviewer 审查修复，不通过则返回 coder |
+| 回归测试 | senior-game-tester | 修复审查通过 | 测试报告 | 通知 tester 回归测试，仍有缺陷则返回修复 |
+| 交付确认 | PM | 测试无缺陷 | 确认交付 | 验收全部交付物，告知可交付 |
 
 #### 迭代机制
 
 以下环节 PM 需主动控制循环，直至达成一致：
 - **需求范围**：PD ↔ 开发 未达成一致 → 返回范围确认阶段
+- **测试用例**：PD + 开发 ↔ 测试 未通过 → 返回测试用例编写阶段
 - **详细设计**：开发 ↔ 架构师 未通过 → 返回详细设计阶段
 - **代码审查**：开发 ↔ 审查员 未通过 → 返回编码开发阶段
+- **缺陷修复**：测试 ↔ 开发 存在缺陷 → 修复 → 审查 → 回归测试，直至无缺陷
 
 ---
 
@@ -155,13 +194,15 @@ flowchart TD
     A --> C[PM: 通知 senior-game-tech-architect 写日报]
     A --> D[PM: 通知 senior-game-coder 写日报]
     A --> E[PM: 通知 senior-game-code-reviewer 写日报]
-    B --> F[各 agent 将日报写入<br>docs/daily/YYYY-MM-DD-{role}.md]
-    C --> F
-    D --> F
-    E --> F
-    F --> G[PM: 读取各角色日报文件]
-    G --> H[PM: 汇总写入项目日报<br>docs/daily/YYYY-MM-DD-daily-report.md]
-    H --> I[PM: 统一 commit 并推送]
+    A --> F[PM: 通知 senior-game-tester 写日报]
+    B --> G[各 agent 将日报写入<br>docs/daily/YYYY-MM-DD-{role}.md]
+    C --> G
+    D --> G
+    E --> G
+    F --> G
+    G --> H[PM: 读取各角色日报文件]
+    H --> I[PM: 汇总写入项目日报<br>docs/daily/YYYY-MM-DD-daily-report.md]
+    I --> J[PM: 统一 commit 并推送]
 ```
 
 #### PM 调度动作表
@@ -172,10 +213,11 @@ flowchart TD
 | 2 | 通知 senior-game-tech-architect 按模板写日报 | senior-game-tech-architect |
 | 3 | 通知 senior-game-coder 按模板写日报 | senior-game-coder |
 | 4 | 通知 senior-game-code-reviewer 按模板写日报 | senior-game-code-reviewer |
-| 5 | 等待各 agent 将日报写入 `docs/daily/YYYY-MM-DD-{role}.md` | — |
-| 6 | 读取各角色日报文件 | — |
-| 7 | 汇总内容写入 `docs/daily/YYYY-MM-DD-daily-report.md` | — |
-| 8 | add / commit / push 所有日报文件 | — |
+| 5 | 通知 senior-game-tester 按模板写日报 | senior-game-tester |
+| 6 | 等待各 agent 将日报写入 `docs/daily/YYYY-MM-DD-{role}.md` | — |
+| 7 | 读取各角色日报文件 | — |
+| 8 | 汇总内容写入 `docs/daily/YYYY-MM-DD-daily-report.md` | — |
+| 9 | add / commit / push 所有日报文件 | — |
 
 #### 各 agent 日报模板
 
@@ -219,6 +261,8 @@ PM 汇总写入 `docs/daily/YYYY-MM-DD-daily-report.md`：
 {从开发日报提取的工作摘要}
 ### 🔍 审查员
 {从审查员日报提取的工作摘要}
+### 🧪 测试
+{从测试日报提取的工作摘要}
 
 ## 三、功能变更清单
 ### ✅ 已完成
@@ -254,8 +298,17 @@ flowchart TD
     F -->|否| G[senior-game-code-reviewer 提出修改意见]
     G --> H[PM: 将审查意见转达 coder<br>返回修复]
     H --> C
-    F -->|是| I[PM: 通知 senior-game-coder 提交代码到仓库]
-    I --> J[PM: 确认缺陷已修复<br>关闭缺陷任务]
+    F -->|是| I[PM: 通知 senior-game-tester 测试修复]
+    I --> J[senior-game-tester 执行测试并产出测试报告]
+    J --> K{存在测试缺陷?}
+    K -->|是| L[PM: 通知 coder 修复测试缺陷]
+    L --> M[senior-game-coder 修复提交]
+    M --> N[PM: 通知 senior-game-code-reviewer 审查]
+    N --> O{审查通过?}
+    O -->|否| M
+    O -->|是| I
+    K -->|否| P[PM: 通知 senior-game-coder 提交代码到仓库]
+    P --> Q[PM: 确认缺陷已修复<br>关闭缺陷任务]
 ```
 
 #### PM 调度动作表
@@ -266,12 +319,15 @@ flowchart TD
 | 2 | 通知 senior-game-coder 开始修复 | — | — |
 | 3 | 收到修复代码后，通知 senior-game-code-reviewer 审查 | senior-game-code-reviewer | 审查报告 |
 | 4 | 审查不通过 → 将审查意见转达 coder，返回步骤 2 | — | — |
-| 5 | 审查通过 → 通知 senior-game-coder 提交代码到仓库 | senior-game-coder | 代码提交 |
-| 6 | 确认缺陷已修复，关闭任务 | — | — |
+| 5 | 审查通过 → 通知 senior-game-tester 测试修复 | senior-game-tester | 测试报告 |
+| 6 | 测试存在缺陷 → 通知 coder 修复，返回步骤 2 | — | — |
+| 7 | 测试通过 → 通知 senior-game-coder 提交代码到仓库 | senior-game-coder | 代码提交 |
+| 8 | 确认缺陷已修复，关闭任务 | — | — |
 
 #### 迭代机制
 
-- **修复-审查循环**：审查不通过 → PM 转达意见 → 开发重新修复 → 再次审查，直到通过
+- **修复-审查-测试循环**：审查不通过 → PM 转达意见 → 开发重新修复 → 再次审查，直到通过
+- **测试回归**：审查通过后 → 测试验证 → 存在缺陷则返回修复循环，直到测试无缺陷
 ```
 
 > **文件结尾注解**：以上三个流程由 senior-game-pm 生成。生成后 senior-game-pm 即完成任务，不再参与任何后续流程。Claude 主控 agent 即 PM，应根据触发条件选择对应流程直接调度 subagent 执行。
