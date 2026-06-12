@@ -15,6 +15,7 @@
       "Bash(npm *)",
       "Bash(npx *)",
       "Bash(node *)",
+      "Bash(python3 *)",
       "Bash(yarn *)",
       "Bash(pnpm *)",
       "Bash(chmod)",
