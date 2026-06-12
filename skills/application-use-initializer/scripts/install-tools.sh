@@ -22,6 +22,7 @@ echo
 TOOLS=(
   "Playwright|playwright|CLI|macOS,Linux,Windows|npm_global|||"
   "auto-feedback|auto-feedback|MCP|macOS,Linux,Windows|npm_global_mcp|feedback|auto-feedback|[]"
+  "@cocaxcode/api-testing-mcp|@cocaxcode/api-testing-mcp|MCP|macOS,Linux,Windows|npx_mcp|api-testing|npx|[\"-y\",\"@cocaxcode/api-testing-mcp@latest\"]"
   "application-use|application-use|CLI|macOS|npm_global|||"
   "agent-computer|agent-computer|MCP|macOS|npm_global_mcp|agent-computer|npx|[\"-y\",\"agent-computer\"]"
   "playwright-spatial-layout-mcp|playwright-spatial-layout-mcp|MCP|macOS,Linux,Windows|npm_global_mcp|playwright-spatial-layout|npx|[\"-y\",\"playwright-spatial-layout-mcp\"]"
@@ -128,6 +129,14 @@ else
         else
           error "   ❌ $NAME 安装失败"
           INSTALL_RESULT+=("$NAME|failed|$PKG")
+        fi
+        ;;
+      npx_mcp)
+        success "   ⏭️  $NAME 使用 npx 方式（无需全局安装）"
+        INSTALL_RESULT+=("$NAME|installed(npx)|$PKG")
+        if [ -n "$MCP_NAME" ]; then
+          info "   📝 写入 MCP 配置: $MCP_NAME"
+          write_mcp_entry "$SETTINGS_FILE" "$MCP_NAME" "$MCP_CMD" "$MCP_ARGS"
         fi
         ;;
       *)

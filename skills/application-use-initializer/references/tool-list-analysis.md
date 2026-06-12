@@ -12,6 +12,7 @@
 | **agent-computer** | macOS桌面应用 | MCP / SDK         | macOS | Accessibility树（类型引用） | 复杂macOS工作流、窗口管理 | ❌ |
 | **playwright-spatial-layout-mcp** | Web页面 | MCP               | 跨平台 | 几何空间（坐标/尺寸/重叠） | 布局问题检测、视觉回归 | ✅ Chrome/Chromium |
 | **@saifulapm/layoutlint** | Web组件代码 | MCP /  CLI / CI集成 | 跨平台 | 静态代码分析（无真实渲染） | CI/CD、开发阶段布局检测 | ❌（纯代码分析） |
+| **api-testing-mcp** | HTTP API接口 | MCP | 跨平台 | 请求/响应分析（REST/GraphQL） | API测试、接口调试、Mock验证 | ❌ |
 
 ---
 
@@ -101,6 +102,20 @@
 
 ---
 
+### 7. api-testing-mcp
+
+| 维度 | 说明 |
+|------|------|
+| **检测对象** | HTTP API接口（RESTful、GraphQL、WebSocket等） |
+| **使用方式** | MCP服务 |
+| **使用平台** | 跨平台（Node.js环境） |
+| **定位能力** | 请求/响应分析，支持参数构造、响应断言、Schema验证 |
+| **适用场景** | API自动化测试、接口调试、Mock数据验证、契约测试 |
+| **依赖浏览器** | ❌ 不依赖 |
+| **特点** | 专注API层测试，支持多种HTTP方法、鉴权方式、响应时间检测、状态码断言 |
+
+---
+
 ## 📈 按使用场景选择指南
 
 | 你的需求 | 推荐工具 |
@@ -112,6 +127,7 @@
 | **操作macOS应用（复杂多步工作流）** | agent-computer |
 | **跨平台应用测试（Web + 桌面）** | auto-feedback |
 | **一体化QA流程（含可访问性审计）** | auto-feedback |
+| **API接口测试与调试** | api-testing-mcp |
 
 ---
 
@@ -131,5 +147,11 @@
    - 浏览器测试：`Playwright`
    - 桌面测试：`auto-feedback`
    - 布局验证：`playwright-spatial-layout-mcp`
+   - API测试：`api-testing-mcp`
+
+4. **API驱动开发**：
+   - 接口调试：`api-testing-mcp`
+   - 后端Mock验证：`api-testing-mcp`
+   - 前端联调：配合 `Playwright` 进行端到端验证
 
 如果需要进一步了解某个工具的安装步骤或具体用法示例，告诉我你的目标场景即可。

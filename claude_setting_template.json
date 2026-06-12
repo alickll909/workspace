@@ -89,6 +89,7 @@
       "Bash(npx playwright install chromium *)",
       "Bash(npx playwright install firefox *)",
       "Bash(npx playwright install webkit *)",
+      "Bash(npx @cocaxcode/api-testing-mcp *)",
       "Bash(npx hasna-computer *)",
       "Bash(npx computer-control-mcp *)",
       "Bash(npx macos-mcp-server *)",
@@ -99,6 +100,7 @@
       "Bash(skills/application-use-initializer/scripts/setup-application-use.sh)",
       "Bash(skills/application-use-initializer/scripts/setup-layoutlint.sh)",
       "Bash(skills/application-use-initializer/scripts/setup-playwright.sh)",
+      "Bash(skills/application-use-initializer/scripts/setup-api-testing-mcp.sh)",
       "Bash(skills/application-use-initializer/scripts/install-tools.sh)"
     ],
     "ask": [
