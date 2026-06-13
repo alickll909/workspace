@@ -20,7 +20,7 @@ echo
 # ---------- 2. 工具清单 ----------
 # 格式: 名称|包名|类型|适用平台|安装方式|MCP服务名|MCP命令|MCP参数JSON
 TOOLS=(
-  "Playwright|playwright|CLI|macOS,Linux,Windows|npm_global|||"
+  "Playwright|playwright|MCP|macOS,Linux,Windows|npm_global_mcp|playwright|npx|[\"-y\",\"@playwright/mcp\",\"--vision\"]"  # Vision 模式默认开启
   "auto-feedback|auto-feedback|MCP|macOS,Linux,Windows|npm_global_mcp|feedback|auto-feedback|[]"
   "@cocaxcode/api-testing-mcp|@cocaxcode/api-testing-mcp|MCP|macOS,Linux,Windows|npx_mcp|api-testing|npx|[\"-y\",\"@cocaxcode/api-testing-mcp@latest\"]"
   "application-use|application-use|CLI|macOS|npm_global|||"

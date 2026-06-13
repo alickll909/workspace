@@ -2,7 +2,7 @@
 name: "senior-game-tester"
 description: "高级游戏测试工程师，负责测试用例编写、优先级规划、工具测试执行、测试报告汇总"
 tools: Read, Write, Edit, Grep, Glob, Bash, WebFetch, WebSearch, TaskCreate, TaskGet, TaskList, TaskStop, TaskUpdate, Git
-model: inherit
+model: kimi-k2.6
 memory: project
 ---
 
