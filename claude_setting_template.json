@@ -94,6 +94,8 @@
       "Bash(npx computer-control-mcp *)",
       "Bash(npx macos-mcp-server *)",
 
+      "Bash(/Users/alickliu/Library/Android/sdk/platform-tools/adb *)",
+
       "Bash(skills/application-use-initializer/scripts/setup-auto-feedback-mcp.sh)",
       "Bash(skills/application-use-initializer/scripts/setup-playwright-spatial-layout-mcp.sh)",
       "Bash(skills/application-use-initializer/scripts/setup-agent-computer-mcp.sh)",
