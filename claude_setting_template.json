@@ -27,6 +27,7 @@
       "Bash(chmod)",
       "Bash(ln -sf *)",
       "Bash(export *)",
+      "Bash(unzip *)",
 
       "Bash(head *)",
       "Bash(tail *)",
