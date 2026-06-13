@@ -13,6 +13,8 @@
 | **playwright-spatial-layout-mcp** | Web页面 | MCP               | 跨平台 | 几何空间（坐标/尺寸/重叠） | 布局问题检测、视觉回归 | ✅ Chrome/Chromium |
 | **@saifulapm/layoutlint** | Web组件代码 | MCP /  CLI / CI集成 | 跨平台 | 静态代码分析（无真实渲染） | CI/CD、开发阶段布局检测 | ❌（纯代码分析） |
 | **api-testing-mcp** | HTTP API接口 | MCP | 跨平台 | 请求/响应分析（REST/GraphQL） | API测试、接口调试、Mock验证 | ❌ |
+| **simdrive** | iOS Simulator / 真机 | MCP | macOS | Visual（截图 + 数字标记 set-of-marks） | iOS应用测试、录制回放、性能分析 | ❌（独立应用） |
+| **mcp-android-emulator** | Android Emulator / 真机 | MCP | macOS, Linux, Windows | UI层次树（Accessibility） + 截图 | Android应用测试、UI自动化 | ❌（独立应用） |
 
 ---
 
@@ -116,6 +118,34 @@
 
 ---
 
+### 8. simdrive
+
+| 维度 | 说明 |
+|------|------|
+| **检测对象** | iOS Simulator + 真实iPhone/iPad设备 |
+| **使用方式** | MCP服务（`pip install --pre simdrive`） |
+| **使用平台** | macOS（依赖Xcode） |
+| **定位能力** | Visual模式：截图 + 自动编号set-of-marks标签，AI选择编号点击，无需解析Accessibility JSON |
+| **适用场景** | iOS应用自动化测试、录制回放、性能采集、日志分析 |
+| **依赖浏览器** | ❌ 不依赖（但模拟器需Xcode安装） |
+| **特点** | 31个工具，支持`observe/tap/swipe/type_text/record_start/replay/perf`等，不抢焦（后台运行），支持YAML+PNG录制回放包 |
+
+---
+
+### 9. mcp-android-emulator
+
+| 维度 | 说明 |
+|------|------|
+| **检测对象** | Android Emulator + 真实Android设备 |
+| **使用方式** | MCP服务（`npm install -g mcp-android-emulator` / `npx mcp-android-emulator`） |
+| **使用平台** | macOS、Linux、Windows |
+| **定位能力** | UI层次树（Accessibility Inspector，类似Web的DOM）+ 截图 |
+| **适用场景** | Android应用自动化测试、UI交互、App管理、Logcat调试 |
+| **依赖浏览器** | ❌ 不依赖（依赖ADB + Android SDK/Emulator） |
+| **特点** | 40+工具（tap/swipe/scroll/pinch/type/launch_app/logcat/wait/assert），支持多AVD管理，安全交互（避让系统栏） |
+
+---
+
 ## 📈 按使用场景选择指南
 
 | 你的需求 | 推荐工具 |
@@ -128,6 +158,8 @@
 | **跨平台应用测试（Web + 桌面）** | auto-feedback |
 | **一体化QA流程（含可访问性审计）** | auto-feedback |
 | **API接口测试与调试** | api-testing-mcp |
+| **iOS应用测试（Simulator/真机）** | simdrive |
+| **Android应用测试（Emulator/真机）** | mcp-android-emulator |
 
 ---
 
@@ -153,5 +185,18 @@
    - 接口调试：`api-testing-mcp`
    - 后端Mock验证：`api-testing-mcp`
    - 前端联调：配合 `Playwright` 进行端到端验证
+
+5. **移动端测试**：
+   - iOS测试：`simdrive`（Simulator + 真机，macOS专属）
+   - Android测试：`mcp-android-emulator`（Emulator + 真机，跨平台）
+   - 跨平台移动测试：配合 `@wdio/mcp`（WebdriverIO统一Web + 移动）
+
+6. **全平台测试体系**：
+   - Web前端：`Playwright` + `playwright-spatial-layout-mcp` + `@saifulapm/layoutlint`
+   - 移动端iOS：`simdrive`
+   - 移动端Android：`mcp-android-emulator`
+   - HTTP API：`api-testing-mcp`
+   - 桌面端：`application-use` / `agent-computer`（macOS）+ `auto-feedback`（跨平台）
+   - QA一体化：`auto-feedback`
 
 如果需要进一步了解某个工具的安装步骤或具体用法示例，告诉我你的目标场景即可。

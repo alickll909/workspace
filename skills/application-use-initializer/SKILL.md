@@ -44,6 +44,8 @@ description: 检测平台、分析可用工具清单、安装尚未安装的工�
 | `scripts/setup-layoutlint.sh` | 安装 @saifulapm/layoutlint（网页布局检测 CLI） | ✅ |
 | `scripts/setup-playwright.sh` | 安装 Playwright + Chromium/Firefox/WebKit 浏览器 + @playwright/mcp（默认开启 Vision 模式） | ✅ |
 | `scripts/setup-api-testing-mcp.sh` | 配置 @cocaxcode/api-testing-mcp MCP 服务（npx 方式） | ✅ |
+| `scripts/setup-simdrive.sh` | 安装并配置 simdrive（iOS Simulator/真机自动化，pip 方式） | macOS |
+| `scripts/setup-mcp-android-emulator.sh` | 安装并配置 mcp-android-emulator（Android 设备自动化，npm/npx 方式） | ✅ |
 
 ## MCP 服务配置参考
 
@@ -53,6 +55,8 @@ description: 检测平台、分析可用工具清单、安装尚未安装的工�
 | playwright-spatial-layout | `playwright-spatial-layout` | `npx` | `["-y","playwright-spatial-layout-mcp"]` | 网页布局空间检测 |
 | api-testing-mcp | `api-testing` | `npx` | `["-y","@cocaxcode/api-testing-mcp@latest"]` | HTTP API 接口测试 |
 | **@playwright/mcp** | **`playwright`** | **`npx`** | **`["-y","@playwright/mcp","--vision"]`** | **浏览器自动化（Vision 模式：截图视觉交互）** |
+| simdrive | `simdrive` | `simdrive` | `[]` | iOS Simulator/真机自动化（pip 安装） |
+| mcp-android-emulator | `android-emulator` | `npx` | `["-y","mcp-android-emulator"]` | Android Emulator/真机自动化 |
 
 > **注**: `application-use` 和 `@saifulapm/layoutlint` 为 CLI 工具，无需 MCP 配置。
 

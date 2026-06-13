@@ -27,6 +27,8 @@ TOOLS=(
   "agent-computer|agent-computer|MCP|macOS|npm_global_mcp|agent-computer|npx|[\"-y\",\"agent-computer\"]"
   "playwright-spatial-layout-mcp|playwright-spatial-layout-mcp|MCP|macOS,Linux,Windows|npm_global_mcp|playwright-spatial-layout|npx|[\"-y\",\"playwright-spatial-layout-mcp\"]"
   "@saifulapm/layoutlint|@saifulapm/layoutlint|CLI|macOS,Linux,Windows|npm_global|||"
+  "simdrive|simdrive|MCP|macOS|pip_mcp|simdrive|simdrive|[]"
+  "mcp-android-emulator|mcp-android-emulator|MCP|macOS,Linux,Windows|npm_global_mcp|android-emulator|npx|[\"-y\",\"mcp-android-emulator\"]"
 )
 
 warn "[1/6] 检测平台: $PLATFORM"
@@ -137,6 +139,20 @@ else
         if [ -n "$MCP_NAME" ]; then
           info "   📝 写入 MCP 配置: $MCP_NAME"
           write_mcp_entry "$SETTINGS_FILE" "$MCP_NAME" "$MCP_CMD" "$MCP_ARGS"
+        fi
+        ;;
+      pip_mcp)
+        PYTHON="$(detect_python)"
+        if $PYTHON -m pip install --pre "$PKG" 2>&1; then
+          success "   ✅ $NAME 安装成功"
+          INSTALL_RESULT+=("$NAME|installed|$PKG")
+          if [ -n "$MCP_NAME" ]; then
+            info "   📝 写入 MCP 配置: $MCP_NAME"
+            write_mcp_entry "$SETTINGS_FILE" "$MCP_NAME" "$MCP_CMD" "$MCP_ARGS"
+          fi
+        else
+          error "   ❌ $NAME 安装失败"
+          INSTALL_RESULT+=("$NAME|failed|$PKG")
         fi
         ;;
       *)

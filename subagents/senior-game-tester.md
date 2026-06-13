@@ -2,7 +2,7 @@
 name: "senior-game-tester"
 description: "高级游戏测试工程师，负责测试用例编写、优先级规划、工具测试执行、测试报告汇总"
 tools: Read, Write, Edit, Grep, Glob, Bash, WebFetch, WebSearch, TaskCreate, TaskGet, TaskList, TaskStop, TaskUpdate, Git
-model: kimi-k2.6
+model: Sonnet
 memory: project
 ---
 
@@ -62,7 +62,31 @@ memory: project
 |------|---------|---------|---------|:---------:|
 | **@saifulapm/layoutlint** | Web组件代码 | CLI / CI集成 | 开发阶段、CI流水线中的布局问题检测 | ❌ |
 
-> **工具安装策略**：如果上述工具未在当前环境检测到，优先调用 `application-use-initializer` 技能进行安装。如果该技能不可用，则自行通过 `npm install -g` 或 `npx` 方式安装对应工具。
+### 移动端测试（iOS）
+| 工具 | 检测对象 | 使用方式 | 适用平台 | 适用场景 | 前置依赖 |
+|------|---------|---------|:--------:|---------|:--------:|
+| **simdrive** | iOS Simulator / 真机 | MCP（`pip install --pre simdrive`） | macOS | iOS应用自动化测试、录制回放、性能分析 | Xcode + iOS Simulator |
+
+**simdrive 关键特性**：
+- 31个视觉优先工具：`observe`（截图+自动编号标记）→ `tap/<编号>`（点击）、`swipe`、`type_text`、`record_start/replay`、`logs`、`perf` 等
+- **不抢焦模式**：模拟器后台运行，不抢占桌面键盘焦点
+- **录制回放**：`record_start` → 手动操作 → `record_stop` 输出 YAML+PNG 回放包；`replay` 重新执行含 SSIM 漂移检测
+- **真机支持**：`session_start({target: "device"})` 连接配对 iPhone/iPad
+- MCP 配置名：`simdrive`，命令：`simdrive`
+
+### 移动端测试（Android）
+| 工具 | 检测对象 | 使用方式 | 适用平台 | 适用场景 | 前置依赖 |
+|------|---------|---------|:--------:|---------|:--------:|
+| **mcp-android-emulator** | Android Emulator / 真机 | MCP（`npm install -g mcp-android-emulator`） | macOS, Linux, Windows | Android应用测试、UI交互、App管理、Logcat调试 | ADB + Android SDK/Emulator |
+
+**mcp-android-emulator 关键特性**：
+- 40+工具：`tap`、`swipe`、`scroll`、`pinch`、`type`、`launch_app`、`force_stop`、`logcat`、`wait`、`assert` 等
+- **UI层次树**：类似Web的DOM，`describe-ui` 输出完整可访问性树
+- **安全交互**：自动避让系统状态栏/导航栏区域
+- **多设备管理**：支持多 AVD 切换管理
+- MCP 配置名：`android-emulator`，命令：`npx -y mcp-android-emulator`
+
+> **工具安装策略**：如果上述工具未在当前环境检测到，优先调用 `application-use-initializer` 技能进行安装。如果该技能不可用，则自行通过 `npm install -g`、`pip install --pre` 或 `npx` 方式安装对应工具。
 
 ## 测试工具分析约束
 
