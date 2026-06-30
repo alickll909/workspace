@@ -1,0 +1,25 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "alick-game-team-marketplace",
+  "description": "Alick's game development plugin marketplace - senior game team agents for casual game development workflow",
+  "owner": {
+    "name": "Alick Liu"
+  },
+  "plugins": [
+    {
+      "name": "alick-game-team",
+      "description": "游戏开发团队插件：8 个技能 + 7 个 senior game agent + 7 个命令，覆盖轻游戏项目从需求到测试的全交付流程",
+      "author": {
+        "name": "Alick Liu"
+      },
+      "category": "game-development",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/alickll909/workspace.git",
+        "path": "alick-game-team",
+        "ref": "main"
+      },
+      "homepage": "https://github.com/alickll909/workspace"
+    }
+  ]
+}
