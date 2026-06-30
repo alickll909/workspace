@@ -27,7 +27,7 @@ allowed-tools: Read, Write
    
    📋 配置摘要
    - agents.yaml: .claude/agents.yaml
-   - Agents: 5（pd, tech-architect, coder, code-reviewer, tester）
+   - Agents: 6（pd, tech-architect, validator, coder, code-reviewer, tester）
    - 共享记忆: docs/team-memory/
    - Agent Teams: 已启用（CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1）
    

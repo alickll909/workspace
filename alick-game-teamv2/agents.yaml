@@ -4,6 +4,8 @@ agents:
     description: "轻游戏行业高级产品经理，负责需求拆解、竞品调研、PRD输出"
   - agent_role: senior-game-tech-architect
     description: "游戏行业技术架构师，负责架构设计与评审"
+  - agent_role: senior-game-validator
+    description: "验证者，对所有子 agent 的工作进行独立评分，默认怀疑态度，连续 3 次不及格触发人工介入"
   - agent_role: senior-game-coder
     description: "高级游戏程序员，负责需求拆分、编码实现、响应审查反馈"
     delegate_to:

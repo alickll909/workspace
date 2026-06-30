@@ -8,7 +8,7 @@
 |------|----------------------|-------------------------------|
 | **协作模式** | PM 逐个手动 Agent tool 调用，等一个完成再进入下一阶段 | Agent Teams 共享 Task 队列 + `delegate_to` 自动链式，agent 间自主协作 |
 | **上下文传递** | PM 在 prompt 中手动拼接上下文 | `docs/team-memory/` 共享记忆层自动读写，各 agent 启动时自动同步 |
-| **Agent 定义** | 7 个角色（含 senior-game-pm 初始化和基础 tester），每个 300-500 行 | 5 个核心角色（去掉 PM 初始化和基础 tester），精简到 ~50 行 |
+| **Agent 定义** | 7 个角色（含 senior-game-pm 初始化和基础 tester），每个 300-500 行 | 6 个角色（新增验证者 validator），精简到 ~50 行 |
 | **命令数量** | 7 个命令（含独立的 code-review / run-tests） | 4 个命令（利用自动 delegate，code-review 和 run-tests 由 coder 自动调用） |
 | **技术基础** | Subagent 标准机制 | Agent Teams 实验特性（需 `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`） |
 | **停止条件** | S0、P1 级别测试用例通过率 100% 方可交付 | 同 v1，S0、P1 通过率 100% 方可交付，通过共享记忆层自动判定 |
@@ -30,7 +30,7 @@
 首次使用先执行 **`/init-team`**，一键初始化 Agent Team 环境：
 - 启用 `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`
 - 部署 `agents.yaml` 到 `.claude/`
-- 安装 5 个 agent 到 `.claude/agents/`
+- 安装 6 个 agent 到 `.claude/agents/`
 - 创建共享记忆目录 `docs/team-memory/`
 
 ## 命令
@@ -48,6 +48,7 @@
 主会话 (Team Lead)
 ├── senior-game-pd                 产品设计
 ├── senior-game-tech-architect     架构设计
+├── senior-game-validator          验证者（Haiku，默认怀疑，评分门禁）
 └── senior-game-coder              开发
     ├── senior-game-code-reviewer  代码审查
     └── senior-game-tester         测试
@@ -56,7 +57,7 @@
 ## 共享记忆层
 
 所有 agent 通过 `docs/team-memory/` 目录共享上下文：
-- **写入**：每个 agent 完成任务后自动写入结构化摘要
+- **写入**：每个 agent 完成任务后自动写入结构化摘要；验证者写入评分报告
 - **读取**：每个 agent 启动时自动读取最近 5 条摘要
 
 解决 Agent Teams 模式下各 teammate 独立上下文的"上下文孤岛"问题。
@@ -67,11 +68,16 @@
 /team-deliver "实现登录功能"
 
   → PD → 编写 PRD → 写入共享记忆
+  → 验证者 → 评分（≥6 及格）→ 写入共享记忆
   → 架构师 → 架构评审 → 写入共享记忆
+  → 验证者 → 评分（≥6 及格）→ 写入共享记忆
   → Coder → 编码实现 → 写入共享记忆
     → 自动 delegate code-reviewer → 审查 → 写入共享记忆
       → 自动 delegate tester → 回归测试 → 写入共享记忆
+  → 验证者 → 最终评分（≥6 及格）→ 写入共享记忆
   ✓ 交付完成
+
+连续 3 次不及格 → ⚠️ 人工介入
 ```
 
 ```
@@ -80,7 +86,10 @@
   → Coder → 修复 → 写入共享记忆
     → 自动 delegate code-reviewer → 审查 → 写入共享记忆
       → 自动 delegate tester → 回归测试 → 写入共享记忆
+  → 验证者 → 评分（≥6 及格）→ 写入共享记忆
   ✓ 缺陷已修复
+
+连续 3 次不及格 → ⚠️ 人工介入
 ```
 
 ## 技能

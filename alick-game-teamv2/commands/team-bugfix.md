@@ -1,10 +1,11 @@
 ---
-description: 启动缺陷修复流程，利用 Agent Teams 链式 delegate 实现修复→审查→回归自主协作
+description: 启动缺陷修复流程，利用 Agent Teams 链式 delegate 实现修复→审查→回归自主协作，修复成果经验证者评分
 argument-hint: [缺陷描述]
 allowed-tools: TaskCreate, Read, Write, Bash(git:*)
 ---
 
 利用 Agent Teams 的分层 delegate 机制（coder → reviewer → tester）完成缺陷修复。
+修复交付后由验证者（senior-game-validator）评分，及格方可关闭。
 
 **执行步骤：**
 
@@ -19,12 +20,18 @@ allowed-tools: TaskCreate, Read, Write, Bash(git:*)
    - 审查不通过 → reviewer 将反馈发送回 coder → coder 修复 → 再次 delegate
    - 审查通过 → 自动 delegate 给 `senior-game-tester` 执行回归测试
    - 回归测试发现缺陷（S0、P1 级别用例未全部通过）→ 通知 coder 修复 → 再次启动修复→审查→测试循环
-   - **回归测试通过条件**：S0、P1 级别用例通过率 **100%** → 通知主会话确认修复完成
+   - **回归测试通过条件**：S0、P1 级别用例通过率 **100%**
 
-4. 各 agent 自动写入共享记忆摘要到 `docs/team-memory/`
+4. 回归测试通过后，创建验证 Task 分配给 `senior-game-validator`：
+   - 验证者对修复质量评分（完成度 0-5 + 质量 0-5，总分 ≥ 6 及格）
+   - 及格 → 通知主会话确认修复完成
+   - 不及格 → 将评分报告发给 coder 重新修复，循环
+   - **连续 3 次不及格**：写入 `docs/team-memory/ESCALATION_*` 标记，**通知用户人工介入**
 
-5. 主会话监控进度，确认缺陷已修复后关闭 Task
+5. 各 agent 自动写入共享记忆摘要到 `docs/team-memory/`
+
+6. 主会话监控进度，确认缺陷已修复后关闭 Task
 
 **注意事项：**
 - 主会话不需要手动转达审查意见，Agent Teams 的 delegate 和 inbox 机制自动处理
-- 主会话仅需在初始分配 Task 和最终确认修复时介入
+- 验证者的评分是最后的门禁，确保修复质量达标
