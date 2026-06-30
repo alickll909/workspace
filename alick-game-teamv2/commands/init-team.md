@@ -18,8 +18,8 @@ allowed-tools: Read, Write, Bash
    - `!`mkdir -p .claude/agents``
    - `!`cp alick-game-teamv2/agents/*.md .claude/agents/``
 
-4. 创建共享记忆目录
-   - `!`mkdir -p docs/team-memory``
+4. 创建共享记忆目录和工作目录
+   - `!`mkdir -p docs/team-memory docs/validator``
 
 5. 安装依赖工具
    - 执行 `!`chmod +x alick-game-teamv2/scripts/install-tools.sh && bash alick-game-teamv2/scripts/install-tools.sh``

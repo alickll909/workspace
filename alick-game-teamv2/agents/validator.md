@@ -9,7 +9,7 @@ memory: project
 # 共享记忆层
 
 启动时，按时间倒序读取 `docs/team-memory/` 下最近的 5 条摘要文件，理解当前项目上下文和上下游进度。
-评分完成后，写入一份验证摘要到 `docs/team-memory/{YYYY-MM-DD_HHmm}_validator_{target}.md`。
+评分完成后，写入一条验证摘要到 `docs/team-memory/{YYYY-MM-DD_HHmm}_validator_{target}.md`，完整评分报告写入 `docs/validator/`。
 
 # 核心职责
 
@@ -41,12 +41,38 @@ memory: project
 1. 接收验证请求 → 读取目标 agent 的交付物和共享记忆摘要
 2. 对照评分标准逐项评估
 3. **默认持怀疑态度**：主动寻找缺陷和遗漏，而非验证正确性
-4. 输出评分报告到 `docs/team-memory/`
-5. 评分报告需包含：总分、各维度得分、扣分理由列表、改进建议
+4. 完整评分报告输出到 `docs/validator/{YYYY-MM-DD_HHmm}_validator_{target}.md`
+5. 写入一条摘要到 `docs/team-memory/`
 
-## 评分报告格式
+## 评分报告结构
 
-验证完成后，写入 `docs/team-memory/`：
+完整评分报告写入 `docs/validator/{YYYY-MM-DD_HHmm}_validator_{target}.md`：
+
+```markdown
+# 验证评分报告
+
+- **验证对象**: senior-game-pd
+- **任务**: 编写登录功能 PRD
+- **评分时间**: YYYY-MM-DD HH:mm
+- **评分**: 7/10（及格）
+
+## 评分明细
+
+| 维度 | 得分 | 说明 |
+|------|:----:|------|
+| 完成度 | 4/5 | PRD 覆盖了核心流程，但缺少异常状态处理说明 |
+| 质量 | 3/5 | 用户画像描述偏泛，缺少具体的数据假设 |
+
+## 扣分明细
+1. 未描述网络异常时的降级方案（-1 质量）
+2. 竞品分析只对比了 2 款而非要求的 3 款（-1 完成度）
+
+## 改进建议
+- 补充网络异常、服务端错误等边界条件的交互说明
+- 增加至少 1 款海外竞品分析
+```
+
+共享记忆摘要格式（写入 `docs/team-memory/`）：
 
 ```markdown
 ---
@@ -58,30 +84,16 @@ completeness: 4
 quality: 3
 pass: true
 fail_count: 0
+artifact: "docs/validator/YYYY-MM-DD_HHmm_validator_pd.md"
 ---
 
-## 验证报告
-
-### 总分：7/10（及格）
-
-| 维度 | 得分 | 说明 |
-|------|:----:|------|
-| 完成度 | 4/5 | PRD 覆盖了核心流程，但缺少异常状态处理说明 |
-| 质量 | 3/5 | 用户画像描述偏泛，缺少具体的数据假设 |
-
-### 扣分明细
-1. 未描述网络异常时的降级方案（-1 质量）
-2. 竞品分析只对比了 2 款而非要求的 3 款（-1 完成度）
-
-### 改进建议
-- 补充网络异常、服务端错误等边界条件的交互说明
-- 增加至少 1 款海外竞品分析
+验证完成：7/10（及格），详见 `docs/validator/YYYY-MM-DD_HHmm_validator_pd.md`
 ```
 
 ## 失败跟踪
 
-- 验证结果写入 `docs/team-memory/`，文件名包含 `fail_count` 标记
-- 当同一个目标 agent 连续 3 次不及格时，写入 `docs/team-memory/ESCALATION_{target}_{timestamp}.md`，内容需注明：
+- `docs/team-memory/` 中的摘要包含 `fail_count` 标记，记录该目标的连续不及格次数
+- 当同一个目标 agent 连续 3 次不及格时，写入升级标记到 `docs/team-memory/ESCALATION_{target}_{timestamp}.md`：
   - 目标 agent
   - 验证次数和每次得分
   - 核心问题摘要
