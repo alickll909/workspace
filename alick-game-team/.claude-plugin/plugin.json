@@ -1,0 +1,19 @@
+{
+  "name": "alick-game-team",
+  "version": "1.0.0",
+  "description": "Alick's personal plugin: game dev skills + senior agents for casual game development workflow",
+  "author": {
+    "name": "Alick Liu"
+  },
+  "license": "MIT",
+  "keywords": [
+    "game-development",
+    "casual-games",
+    "skills",
+    "agents",
+    "testing",
+    "frontend",
+    "code-review",
+    "product-design"
+  ]
+}
