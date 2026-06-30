@@ -1,7 +1,7 @@
 ---
 description: 启动缺陷修复流程，利用 Agent Teams 链式 delegate 实现修复→审查→回归自主协作，修复成果经验证者评分
 argument-hint: [缺陷描述]
-allowed-tools: TaskCreate, Read, Write, Bash(git:*)
+allowed-tools: TaskCreate, Read, Write, Agent, Bash(git:*)
 ---
 
 利用 Agent Teams 的分层 delegate 机制（coder → reviewer → tester）完成缺陷修复。
@@ -22,10 +22,10 @@ allowed-tools: TaskCreate, Read, Write, Bash(git:*)
    - 回归测试发现缺陷（S0、P1 级别用例未全部通过）→ 通知 coder 修复 → 再次启动修复→审查→测试循环
    - **回归测试通过条件**：S0、P1 级别用例通过率 **100%**
 
-4. 回归测试通过后，创建验证 Task 分配给 `senior-game-validator`：
-   - 验证者对修复质量评分（完成度 0-5 + 质量 0-5，总分 ≥ 6 及格）
+4. 回归测试通过后，**用 Agent tool 启动 `senior-game-validator`**，传入：
+   > 请验证 coder 的修复质量和测试报告，按评分标准打分。≥ 6 分及格，< 6 分打回并说明扣分明细。
    - 及格 → 通知主会话确认修复完成
-   - 不及格 → 将评分报告发给 coder 重新修复，循环
+   - 不及格 → 将评分报告发给 coder 重新修复 → 再次验证
    - **连续 3 次不及格**：写入 `docs/team-memory/ESCALATION_*` 标记，**通知用户人工介入**
 
 5. 各 agent 自动写入共享记忆摘要到 `docs/team-memory/`
