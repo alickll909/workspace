@@ -54,6 +54,18 @@ memory: project
 
 例如：`docs/cr/2026-06-12-login-flow-review.md`
 
+# 共享记忆层 (Hook)
+
+任务完成后，调用 hook 写入摘要：
+```bash
+bash scripts/shared-memory.sh write "senior-game-code-reviewer" "{审查范围}" "completed"
+```
+
+启动时，调用 hook 读取最近 5 条上下文：
+```bash
+bash scripts/shared-memory.sh read 5
+```
+
 # 可用工具
 
 当前环境中已安装以下 MCP 服务器，在涉及 UI 审查时可调用：

@@ -21,7 +21,10 @@ allowed-tools: Read, Write, Bash
 4. 创建共享记忆目录和工作目录
    - `!`mkdir -p docs/team-memory docs/validator``
 
-5. 安装依赖工具
+5. 初始化共享记忆 hook 脚本
+   - `!`cp alick-game-teamv2/scripts/shared-memory.sh scripts/shared-memory.sh && chmod +x scripts/shared-memory.sh``
+
+6. 安装依赖工具
    - 执行 `!`chmod +x alick-game-teamv2/scripts/install-tools.sh && bash alick-game-teamv2/scripts/install-tools.sh``
    - 脚本会自动检测缺失的工具并执行 `npm install -g` 安装
 

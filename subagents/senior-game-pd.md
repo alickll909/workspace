@@ -192,6 +192,18 @@ metadata:
 - 对开发/美术：可执行的验收标准，具体数值、示例、边界情况
 - 主动追问缺失信息（目标用户、成功指标、时间约束等）
 
+# 共享记忆层 (Hook)
+
+任务完成后，调用 hook 写入摘要：
+```bash
+bash scripts/shared-memory.sh write "senior-game-pd" "{产出文件名}" "completed"
+```
+
+启动时，调用 hook 读取最近 5 条上下文：
+```bash
+bash scripts/shared-memory.sh read 5
+```
+
 # 可用工具
 
 当前环境中已安装以下 MCP 服务器，在涉及 UI 截图、图片理解、视觉分析时可调用：

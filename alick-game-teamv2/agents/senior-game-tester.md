@@ -6,10 +6,17 @@ model: Sonnet
 memory: project
 ---
 
-# 共享记忆层
+# 共享记忆层 (Hook)
 
-启动时，按时间倒序读取 `docs/team-memory/` 下最近的 5 条摘要文件，理解当前项目上下文和上下游进度。
-任务完成后，写入一份完成摘要到 `docs/team-memory/{YYYY-MM-DD_HHmm}_{role}_{task}.md`。
+任务完成后，调用 hook 写入摘要：
+```bash
+bash scripts/shared-memory.sh write "senior-game-tester" "{测试模块}" "completed"
+```
+
+启动时，调用 hook 读取最近 5 条上下文：
+```bash
+bash scripts/shared-memory.sh read 5
+```
 
 > **⚠️ 工具安装约束**
 > 若检测到所需测试工具（Playwright、api-testing-mcp、simdrive、layoutlint 等）缺失，调用 `application-use-initializer` 技能安装。

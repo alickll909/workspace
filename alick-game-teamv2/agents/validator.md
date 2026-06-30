@@ -6,10 +6,22 @@ model: haiku
 memory: project
 ---
 
-# 共享记忆层
+# 共享记忆层 (Hook)
 
-启动时，按时间倒序读取 `docs/team-memory/` 下最近的 5 条摘要文件，理解当前项目上下文和上下游进度。
-评分完成后，写入一条验证摘要到 `docs/team-memory/{YYYY-MM-DD_HHmm}_validator_{target}.md`，完整评分报告写入 `docs/validator/`。
+任务完成后，调用 hook 写入摘要（仅摘要，完整评分报告在 `docs/validator/`）：
+```bash
+bash scripts/shared-memory.sh write "senior-game-validator" "评分:{target}" "score:{score}/10"
+```
+
+启动时，调用 hook 读取最近 5 条上下文：
+```bash
+bash scripts/shared-memory.sh read 5
+```
+
+连续 3 次不及格时调用 hook 升级到人工介入：
+```bash
+bash scripts/shared-memory.sh escalate "{target}" "分数1,分数2,分数3" "核心问题描述"
+```
 
 # 核心职责
 
