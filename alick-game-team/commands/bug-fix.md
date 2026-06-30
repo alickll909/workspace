@@ -16,5 +16,5 @@ allowed-tools: TaskCreate, Read, Write, Bash(git:*)
 4. 收到修复代码后，用 Agent tool 启动 `senior-game-code-reviewer` agent 审查
 5. 审查不通过 → 将审查意见转达 coder，返回步骤 3
 6. 审查通过 → 用 Agent tool 启动 `senior-game-tester` agent 测试修复
-7. 测试存在缺陷 → 返回步骤 3
-8. 测试通过 → 通知 coder 提交到仓库，关闭任务
+7. 测试存在缺陷（S0、P1 级别用例未全部通过）→ 返回步骤 3
+8. 测试通过（S0、P1 级别用例通过率 100%）→ 通知 coder 提交到仓库，关闭任务

@@ -20,6 +20,21 @@
         "ref": "main"
       },
       "homepage": "https://github.com/alickll909/workspace"
+    },
+    {
+      "name": "alick-game-teamv2",
+      "description": "游戏开发团队 v2：基于 Claude Code Agent Teams 的多 Agent 自主协作插件，5 个 agent 通过 agents.yaml 分层嵌套实现自主 delegate",
+      "author": {
+        "name": "Alick Liu"
+      },
+      "category": "game-development",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/alickll909/workspace.git",
+        "path": "alick-game-teamv2",
+        "ref": "main"
+      },
+      "homepage": "https://github.com/alickll909/workspace"
     }
   ]
 }

@@ -1,0 +1,13 @@
+max_depth: 3
+agents:
+  - agent_role: senior-game-pd
+    description: "轻游戏行业高级产品经理，负责需求拆解、竞品调研、PRD输出"
+  - agent_role: senior-game-tech-architect
+    description: "游戏行业技术架构师，负责架构设计与评审"
+  - agent_role: senior-game-coder
+    description: "高级游戏程序员，负责需求拆分、编码实现、响应审查反馈"
+    delegate_to:
+      - agent_role: senior-game-code-reviewer
+        description: "代码审查专家，关注架构遵循、代码风险、安全漏洞"
+      - agent_role: senior-game-tester
+        description: "高级游戏测试工程师，负责测试用例编写、测试执行、UI评分"

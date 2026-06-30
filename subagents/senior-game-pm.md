@@ -150,14 +150,14 @@ flowchart TD
     X -->|否| U
     X -->|是| Y[PM: 通知 senior-game-tester<br>依据代码 + 测试用例执行测试]
     Y --> Z[senior-game-tester 产出测试报告]
-    Z --> AA{存在测试缺陷?}
-    AA -->|是| AB[PM: 通知 senior-game-coder 修复缺陷]
+    Z --> AA{S0/P1 用例<br>通过率100%?}
+    AA -->|否| AB[PM: 通知 senior-game-coder 修复缺陷]
     AB --> AC[senior-game-coder 修复提交]
     AC --> AD[PM: 通知 senior-game-code-reviewer 审查]
     AD --> AE{审查通过?}
     AE -->|否| AB
     AE -->|是| Y
-    AA -->|否| AF[PM: 确认代码提交到仓库]
+    AA -->|是| AF[PM: 确认代码提交到仓库]
     AF --> AG[项目达到可交付状态]
 ```
 
@@ -177,11 +177,11 @@ PM 按以下阶段顺序调度 subagent，等待交付物就绪后再进入下�
 | 用例评审 | senior-game-pd + senior-game-coder | 测试用例就绪 | 用例评审通过判定 | 组织 PD 与开发评审测试用例，不通过则返回 tester |
 | 编码开发 | senior-game-coder | 用例评审通过 | 代码提交 | 通知 coder 编码 |
 | 代码审查 | senior-game-code-reviewer | 代码就绪 | 审查报告 | 通知 reviewer 审查，不通过则返回 coder |
-| 测试执行 | senior-game-tester | 审查通过 | 测试报告 | 通知 tester 依据代码+测试用例执行测试 |
-| 缺陷修复 | senior-game-coder | 测试报告含缺陷 | 修复代码提交 | 通知 coder 修复缺陷 |
+| 测试执行 | senior-game-tester | 审查通过 | 测试报告 | 通知 tester 依据代码+测试用例执行测试，**S0、P1 通过率须达 100%** |
+| 缺陷修复 | senior-game-coder | 测试报告含缺陷（S0/P1 未全通过） | 修复代码提交 | 通知 coder 修复缺陷 |
 | 修复审查 | senior-game-code-reviewer | 修复代码就绪 | 审查通过判定 | 通知 reviewer 审查修复，不通过则返回 coder |
-| 回归测试 | senior-game-tester | 修复审查通过 | 测试报告 | 通知 tester 回归测试，仍有缺陷则返回修复 |
-| 交付确认 | PM | 测试无缺陷 | 确认交付 | 验收全部交付物，告知可交付 |
+| 回归测试 | senior-game-tester | 修复审查通过 | 测试报告 | 通知 tester 回归测试，**S0、P1 通过率须达 100%**，否则返回修复 |
+| 交付确认 | PM | S0/P1 通过率 100% | 确认交付 | 验收全部交付物，告知可交付 |
 
 #### 迭代机制
 
@@ -190,7 +190,7 @@ PM 按以下阶段顺序调度 subagent，等待交付物就绪后再进入下�
 - **测试用例**：PD + 开发 ↔ 测试 未通过 → 返回测试用例编写阶段
 - **详细设计**：开发 ↔ 架构师 未通过 → 返回详细设计阶段
 - **代码审查**：开发 ↔ 审查员 未通过 → 返回编码开发阶段
-- **缺陷修复**：测试 ↔ 开发 存在缺陷 → 修复 → 审查 → 回归测试，直至无缺陷
+- **缺陷修复**：测试 ↔ 开发 存在缺陷（S0/P1 未全通过）→ 修复 → 审查 → 回归测试，直至 S0、P1 通过率达 **100%**
 
 ---
 
@@ -316,14 +316,14 @@ flowchart TD
     H --> C
     F -->|是| I[PM: 通知 senior-game-tester 测试修复]
     I --> J[senior-game-tester 执行测试并产出测试报告]
-    J --> K{存在测试缺陷?}
-    K -->|是| L[PM: 通知 coder 修复测试缺陷]
+    J --> K{S0/P1 用例<br>通过率100%?}
+    K -->|否| L[PM: 通知 coder 修复测试缺陷]
     L --> M[senior-game-coder 修复提交]
     M --> N[PM: 通知 senior-game-code-reviewer 审查]
     N --> O{审查通过?}
     O -->|否| M
     O -->|是| I
-    K -->|否| P[PM: 通知 senior-game-coder 提交代码到仓库]
+    K -->|是| P[PM: 通知 senior-game-coder 提交代码到仓库]
     P --> Q[PM: 确认缺陷已修复<br>关闭缺陷任务]
 ```
 
@@ -335,15 +335,15 @@ flowchart TD
 | 2 | 通知 senior-game-coder 开始修复 | — | — |
 | 3 | 收到修复代码后，通知 senior-game-code-reviewer 审查 | senior-game-code-reviewer | 审查报告 |
 | 4 | 审查不通过 → 将审查意见转达 coder，返回步骤 2 | — | — |
-| 5 | 审查通过 → 通知 senior-game-tester 测试修复 | senior-game-tester | 测试报告 |
-| 6 | 测试存在缺陷 → 通知 coder 修复，返回步骤 2 | — | — |
-| 7 | 测试通过 → 通知 senior-game-coder 提交代码到仓库 | senior-game-coder | 代码提交 |
+| 5 | 审查通过 → 通知 senior-game-tester 测试修复，**S0、P1 通过率须达 100%** | senior-game-tester | 测试报告 |
+| 6 | 测试存在缺陷（S0/P1 未全通过）→ 通知 coder 修复，返回步骤 2 | — | — |
+| 7 | 测试通过（S0/P1 通过率 100%）→ 通知 senior-game-coder 提交代码到仓库 | senior-game-coder | 代码提交 |
 | 8 | 确认缺陷已修复，关闭任务 | — | — |
 
 #### 迭代机制
 
 - **修复-审查-测试循环**：审查不通过 → PM 转达意见 → 开发重新修复 → 再次审查，直到通过
-- **测试回归**：审查通过后 → 测试验证 → 存在缺陷则返回修复循环，直到测试无缺陷
+- **测试回归**：审查通过后 → 测试验证 → 存在缺陷（S0/P1 未全通过）则返回修复循环，直到 S0、P1 通过率达 **100%**
 ```
 
 > **文件结尾注解**：以上三个流程由 senior-game-pm 生成。生成后 senior-game-pm 即完成任务，不再参与任何后续流程。Claude 主控 agent 即 PM，应根据触发条件选择对应流程直接调度 subagent 执行。

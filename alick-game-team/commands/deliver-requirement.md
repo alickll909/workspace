@@ -23,4 +23,5 @@ allowed-tools: Read, Write
    - senior-game-code-reviewer → 代码审查
    - senior-game-tester → 测试执行
 4. 每阶段等待交付物就绪后再进入下一阶段
-5. 全部完成后告知用户项目达到可交付状态
+5. 测试阶段要求 senior-game-tester 执行所有测试用例，**S0、P1 级别用例通过率达 100%** 方可视为测试通过
+6. 全部完成后告知用户项目达到可交付状态

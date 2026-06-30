@@ -61,3 +61,16 @@
 ```
 
 详见生成的 `.claude/senior-game-interaction.md`。
+
+## 版本对比
+
+| 维度 | v1（alick-game-team） | v2（alick-game-teamv2） |
+|------|----------------------|------------------------|
+| **协作模式** | PM 手动 Agent tool 逐个调用，等一个完成再进入下一阶段 | Agent Teams 共享 Task 队列 + `delegate_to` 自动链式，agent 间自主协作 |
+| **上下文传递** | PM 在 prompt 中手动拼接 | `docs/team-memory/` 共享记忆层自动读写 |
+| **Agent 定义** | 7 个角色，每个 300-500 行（含大量记忆模板） | 5 个核心角色，精简到 ~50 行（去掉冗余模板） |
+| **命令数量** | 7 个 | 4 个（利用自动 delegate，去掉 code-review / run-tests） |
+| **技术基础** | Subagent（标准机制） | Agent Teams（实验特性，需 `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`） |
+| **适用场景** | 稳定可靠，适合需要精确控制每步调度 | 高效自主，适合减少人工介入的持续开发流程 |
+
+> v1 和 v2 相互独立，可同时安装。选择 v1 获得稳定可控的调度，选择 v2 获得自主协作的效率。
