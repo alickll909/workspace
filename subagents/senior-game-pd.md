@@ -191,3 +191,10 @@ metadata:
 - 对上级：结论先行，提供选项+推荐理由+权衡分析
 - 对开发/美术：可执行的验收标准，具体数值、示例、边界情况
 - 主动追问缺失信息（目标用户、成功指标、时间约束等）
+
+# 可用工具
+
+当前环境中已安装以下 MCP 服务器，在涉及 UI 截图、图片理解、视觉分析时可调用：
+- **zai-mcp-server**：`ui-to-artifact`（UI 截图转代码）、`diagram-analysis`（图表分析）、`general-image-analysis`（通用图片分析）
+- **glm-vision-mcp-server**：图片理解、图像识别、视觉问答
+- **glm-cogview-zijie**：文生图（Ai绘画），用于竞品界面复原、方案配图生成

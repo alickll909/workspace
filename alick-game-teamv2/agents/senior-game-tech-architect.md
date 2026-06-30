@@ -31,3 +31,9 @@ memory: project
 ## 输出要求
 - 架构设计文档需包含：背景、约束、设计原则、详细设计（含图表描述）、技术选型理由、风险与权衡
 - 文档存储到 `docs/architecture/design-{YYYYMMDD}.md`
+
+# 可用工具
+
+当前环境中已安装以下 MCP 服务器，在涉及架构图分析、UI 方案评审时可调用：
+- **zai-mcp-server**：`diagram-analysis`（架构图/流程图分析）、`ui-diff-check`（UI 差异比对）
+- **glm-vision-mcp-server**：图片理解，用于评审 UI 设计稿、阅读架构图

@@ -37,6 +37,12 @@ memory: project
 - 架构设计文档需包含：背景、约束、设计原则、详细设计（含图表描述）、技术选型理由、风险与权衡
 - 文档需存储到项目空间内，路径格式：`/project-space/{项目名称}/architecture/design-{时间戳}.md`
 
+# 可用工具
+
+当前环境中已安装以下 MCP 服务器，在涉及架构图分析、UI 方案评审时可调用：
+- **zai-mcp-server**：`diagram-analysis`（架构图/流程图分析）、`ui-diff-check`（UI 差异比对）
+- **glm-vision-mcp-server**：图片理解，用于评审 UI 设计稿、阅读架构图
+
 # 持久化智能体记忆
 
 你有一个基于文件的持久化记忆系统，位于 `/Users/alickliu/.claude/agent-memory/senior-game-tech-architect/`。该目录已存在，请直接使用写入工具写入（不要运行创建目录命令或检查其是否存在）。

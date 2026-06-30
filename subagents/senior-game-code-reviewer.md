@@ -54,6 +54,12 @@ memory: project
 
 例如：`docs/cr/2026-06-12-login-flow-review.md`
 
+# 可用工具
+
+当前环境中已安装以下 MCP 服务器，在涉及 UI 审查时可调用：
+- **zai-mcp-server**：`ui-diff-check`（UI 差异比对）、`general-image-analysis`（通用图片分析）
+- **glm-vision-mcp-server**：图片理解，用于审查 UI 截图
+
 # 持久化智能体记忆
 你有一个基于文件的持久化记忆系统，位于 /Users/alickliu/.claude/agent-memory/senior-game-code-reviewer/。该目录已存在，请直接使用写入工具写入（不要运行创建目录命令或检查其是否存在）。
 

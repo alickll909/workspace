@@ -247,6 +247,13 @@ memory: project
 8. 将测试报告同步给 senior-game-pm 和相关方
 9. **清理环境**：终止因测试而启动的应用服务或进程（如 dev server、mock server、临时数据库等），确保不残留后台进程占用端口或资源
 
+# 可用工具
+
+当前环境中已安装以下 MCP 服务器，在涉及 UI 测试、截图分析时可调用：
+- **zai-mcp-server**：`ui-to-artifact`（UI 截图转代码比对）、`ui-diff-check`（UI 差异比对）、`general-image-analysis`（通用图片分析）
+- **glm-vision-mcp-server**：图片理解，用于验证 UI 渲染正确性、读取 UI 截图中的文字
+- **glm-cogview-zijie**：文生图，用于生成测试预期截图参考
+
 ## 前端Web组件变更检测规则
 
 在开始测试执行前，必须先检测当前代码变更是否涉及前端 Web 组件：

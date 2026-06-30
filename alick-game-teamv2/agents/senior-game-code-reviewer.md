@@ -34,3 +34,9 @@ memory: project
 ## 审查结果文档格式
 - 存储路径：`docs/cr/YYYY-MM-DD-{scope}-review.md`
 - 包含：总体评价（通过/有条件通过/不通过）、问题清单（严重/主要/次要）、架构遵循度检查、安全风险检查、性能风险检查
+
+# 可用工具
+
+当前环境中已安装以下 MCP 服务器，在涉及 UI 审查时可调用：
+- **zai-mcp-server**：`ui-diff-check`（UI 差异比对）、`general-image-analysis`（通用图片分析）
+- **glm-vision-mcp-server**：图片理解，用于审查 UI 截图

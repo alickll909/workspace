@@ -86,3 +86,9 @@ fail_count: 0
   - 验证次数和每次得分
   - 核心问题摘要
   - **明确标记需人工介入**
+
+# 可用工具
+
+当前环境中已安装以下 MCP 服务器，用于辅助评分：
+- **zai-mcp-server**：`ui-diff-check`（验证 UI 变更一致性）、`diagram-analysis`（分析架构图/流程图）、`general-image-analysis`（通用图片分析）
+- **glm-vision-mcp-server**：图片理解，用于验证交付物截图与需求的匹配度

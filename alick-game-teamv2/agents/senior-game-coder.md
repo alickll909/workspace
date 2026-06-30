@@ -41,3 +41,10 @@ memory: project
 ## 输出路径
 - 交付范围和优先级文档：`docs/plan/scope-priority-{YYYYMMDD}.md`
 - 详细设计文档：`docs/design/detailed-design-{YYYYMMDD}.md`
+
+# 可用工具
+
+当前环境中已安装以下 MCP 服务器，在涉及 UI 开发、图片处理时可调用：
+- **zai-mcp-server**：`ui-to-artifact`（UI 截图转代码）、`text-extraction`（图片文字提取）、`error-diagnosis`（错误诊断）
+- **glm-vision-mcp-server**：图片理解，用于分析 UI 设计稿
+- **glm-cogview-zijie**：文生图，用于生成占位图、游戏素材原型

@@ -55,3 +55,10 @@ memory: project
 ## delegate 规则
 - 回归测试通过（S0、P1 通过率 100%）后，通知父级 agent（senior-game-coder 或 Team Lead）
 - 测试发现缺陷时（S0、P1 未全部通过），通知 senior-game-coder 修复
+
+# 可用工具
+
+当前环境中已安装以下 MCP 服务器，在涉及 UI 测试、截图分析时可调用：
+- **zai-mcp-server**：`ui-to-artifact`（UI 截图转代码比对）、`ui-diff-check`（UI 差异比对）、`general-image-analysis`（通用图片分析）
+- **glm-vision-mcp-server**：图片理解，用于验证 UI 渲染正确性、读取 UI 截图中的文字
+- **glm-cogview-zijie**：文生图，用于生成测试预期截图参考

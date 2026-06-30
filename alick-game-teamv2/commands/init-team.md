@@ -1,6 +1,6 @@
 ---
 description: 一键初始化 Agent Team 环境（首次使用先执行此命令）
-allowed-tools: Read, Write
+allowed-tools: Read, Write, Bash
 ---
 
 一键初始化 Agent Team 环境。执行以下步骤：
@@ -14,14 +14,18 @@ allowed-tools: Read, Write
 2. 将插件内的 `agents.yaml` 复制到项目 `.claude/agents.yaml`
    - `!`cp alick-game-teamv2/agents.yaml .claude/agents.yaml``
 
-3. 将 5 个 agent 定义文件复制到 `.claude/agents/`
+3. 将 6 个 agent 定义文件复制到 `.claude/agents/`
    - `!`mkdir -p .claude/agents``
    - `!`cp alick-game-teamv2/agents/*.md .claude/agents/``
 
 4. 创建共享记忆目录
    - `!`mkdir -p docs/team-memory``
 
-5. 输出配置摘要：
+5. 检查并安装依赖工具
+   - 执行 `!`chmod +x alick-game-teamv2/scripts/install-tools.sh && bash alick-game-teamv2/scripts/install-tools.sh``
+   - 如果有工具缺失，提示用户安装
+
+6. 输出配置摘要：
    ```
    ✅ Agent Team 环境初始化完成
    
@@ -30,6 +34,7 @@ allowed-tools: Read, Write
    - Agents: 6（pd, tech-architect, validator, coder, code-reviewer, tester）
    - 共享记忆: docs/team-memory/
    - Agent Teams: 已启用（CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1）
+   - 依赖工具: 已检查（glm-cogview-zijie, glm-vision, zai-mcp-server）
    
    可用命令：
    /team-deliver [需求描述] - 启动需求交付流程

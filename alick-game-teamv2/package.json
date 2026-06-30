@@ -1,0 +1,18 @@
+{
+  "name": "alick-game-teamv2",
+  "version": "2.0.0",
+  "description": "游戏开发团队 v2 — 基于 Claude Code Agent Teams 的多 Agent 自主协作插件",
+  "private": true,
+  "engines": {
+    "node": ">=18.0.0",
+    "claude-code": ">=2.1.32"
+  },
+  "optionalDependencies": {
+    "glm-cogview-zijie": ">=1.0.3",
+    "glm-vision-mcp-server": ">=1.0.1",
+    "zai-mcp-server": "latest"
+  },
+  "scripts": {
+    "postinstall": "echo '=== alick-game-teamv2 已安装，首次使用请执行 /init-team ==='"
+  }
+}
