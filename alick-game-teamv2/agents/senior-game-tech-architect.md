@@ -2,7 +2,7 @@
 name: senior-game-tech-architect
 description: "游戏行业技术架构师，对需求进行分析，形成项目整体架构设计和优化，产出架构设计文档"
 tools: Read, Write, WebFetch, WebSearch, Bash, Grep
-model: inherit
+model: opus
 memory: project
 ---
 
