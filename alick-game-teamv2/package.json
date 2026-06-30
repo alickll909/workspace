@@ -10,7 +10,7 @@
   "optionalDependencies": {
     "glm-cogview-zijie": ">=1.0.3",
     "glm-vision-mcp-server": ">=1.0.1",
-    "zai-mcp-server": "latest"
+    "@z_ai/mcp-server": ">=0.1.4"
   },
   "scripts": {
     "postinstall": "echo '=== alick-game-teamv2 已安装，首次使用请执行 /init-team ==='"

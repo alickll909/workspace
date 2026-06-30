@@ -29,11 +29,13 @@ else
   echo -e "${GREEN}✔ glm-vision-mcp-server 安装完成${NC}"
 fi
 
-# 3. zai-mcp-server
+# 3. zai-mcp-server (@z_ai/mcp-server)
 if which zai-mcp-server 2>/dev/null; then
   echo -e "${GREEN}✔ zai-mcp-server${NC}"
 else
-  echo -e "${YELLOW}✗ zai-mcp-server 未安装，请手动安装${NC}"
+  echo -e "${YELLOW}✗ zai-mcp-server 未安装，正在安装...${NC}"
+  npm install -g @z_ai/mcp-server
+  echo -e "${GREEN}✔ zai-mcp-server 安装完成${NC}"
 fi
 
 echo ""

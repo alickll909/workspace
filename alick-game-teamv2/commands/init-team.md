@@ -21,9 +21,9 @@ allowed-tools: Read, Write, Bash
 4. 创建共享记忆目录
    - `!`mkdir -p docs/team-memory``
 
-5. 检查并安装依赖工具
+5. 安装依赖工具
    - 执行 `!`chmod +x alick-game-teamv2/scripts/install-tools.sh && bash alick-game-teamv2/scripts/install-tools.sh``
-   - 如果有工具缺失，提示用户安装
+   - 脚本会自动检测缺失的工具并执行 `npm install -g` 安装
 
 6. 输出配置摘要：
    ```
@@ -34,7 +34,7 @@ allowed-tools: Read, Write, Bash
    - Agents: 6（pd, tech-architect, validator, coder, code-reviewer, tester）
    - 共享记忆: docs/team-memory/
    - Agent Teams: 已启用（CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1）
-   - 依赖工具: 已检查（glm-cogview-zijie, glm-vision, zai-mcp-server）
+   - 依赖工具: 已安装（glm-cogview-zijie, glm-vision, zai-mcp-server）
    
    可用命令：
    /team-deliver [需求描述] - 启动需求交付流程
