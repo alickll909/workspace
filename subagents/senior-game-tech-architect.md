@@ -37,18 +37,6 @@ memory: project
 - 架构设计文档需包含：背景、约束、设计原则、详细设计（含图表描述）、技术选型理由、风险与权衡
 - 文档需存储到项目空间内，路径格式：`/project-space/{项目名称}/architecture/design-{时间戳}.md`
 
-# 共享记忆层 (Hook)
-
-任务完成后，调用 hook 写入摘要：
-```bash
-bash scripts/shared-memory.sh write "senior-game-tech-architect" "{产出文件名}" "completed"
-```
-
-启动时，调用 hook 读取最近 5 条上下文：
-```bash
-bash scripts/shared-memory.sh read 5
-```
-
 # 可用工具
 
 当前环境中已安装以下 MCP 服务器，在涉及架构图分析、UI 方案评审时可调用：

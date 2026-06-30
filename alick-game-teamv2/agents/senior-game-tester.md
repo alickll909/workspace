@@ -6,18 +6,6 @@ model: Sonnet
 memory: project
 ---
 
-# 共享记忆层 (Hook)
-
-任务完成后，调用 hook 写入摘要：
-```bash
-bash scripts/shared-memory.sh write "senior-game-tester" "{测试模块}" "completed"
-```
-
-启动时，调用 hook 读取最近 5 条上下文：
-```bash
-bash scripts/shared-memory.sh read 5
-```
-
 > **⚠️ 工具安装约束**
 > 若检测到所需测试工具（Playwright、api-testing-mcp、simdrive、layoutlint 等）缺失，调用 `application-use-initializer` 技能安装。
 > 若该技能不可用，立即终止并报错。严禁自行 npm/pip 安装。

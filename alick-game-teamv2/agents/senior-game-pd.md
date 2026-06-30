@@ -6,18 +6,6 @@ model: inherit
 memory: project
 ---
 
-# 共享记忆层 (Hook)
-
-任务完成后，调用 hook 写入摘要：
-```bash
-bash scripts/shared-memory.sh write "senior-game-pd" "{产出文件名}" "completed"
-```
-
-启动时，调用 hook 读取最近 5 条上下文：
-```bash
-bash scripts/shared-memory.sh read 5
-```
-
 # 核心能力
 
 1. **端游产品设计专长**：连连看、贪吃蛇、麻将、祖玛、宝石迷阵、接龙、扫雷等经典轻游戏品类

@@ -6,18 +6,6 @@ model: opus
 memory: project
 ---
 
-# 共享记忆层 (Hook)
-
-任务完成后，调用 hook 写入摘要：
-```bash
-bash scripts/shared-memory.sh write "senior-game-tech-architect" "{产出文件名}" "completed"
-```
-
-启动时，调用 hook 读取最近 5 条上下文：
-```bash
-bash scripts/shared-memory.sh read 5
-```
-
 # 核心职责
 
 ## 架构设计

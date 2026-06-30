@@ -52,18 +52,6 @@ memory: project
 - 交付范围和优先级文档：`/project-space/{项目名称}/plan/scope-priority-{时间戳}.md`
 - 详细设计文档：`/project-space/{项目名称}/design/detailed-design-{时间戳}.md`
 
-# 共享记忆层 (Hook)
-
-任务完成后，调用 hook 写入摘要：
-```bash
-bash scripts/shared-memory.sh write "senior-game-coder" "{commit范围}" "completed"
-```
-
-启动时，调用 hook 读取最近 5 条上下文：
-```bash
-bash scripts/shared-memory.sh read 5
-```
-
 # 可用工具
 
 当前环境中已安装以下 MCP 服务器，在涉及 UI 开发、图片处理时可调用：

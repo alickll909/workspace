@@ -6,23 +6,6 @@ model: haiku
 memory: project
 ---
 
-# 共享记忆层 (Hook)
-
-任务完成后，调用 hook 写入摘要（仅摘要，完整评分报告在 `docs/validator/`）：
-```bash
-bash scripts/shared-memory.sh write "senior-game-validator" "评分:{target}" "score:{score}/10"
-```
-
-启动时，调用 hook 读取最近 5 条上下文：
-```bash
-bash scripts/shared-memory.sh read 5
-```
-
-连续 3 次不及格时调用 hook 升级到人工介入：
-```bash
-bash scripts/shared-memory.sh escalate "{target}" "分数1,分数2,分数3" "核心问题描述"
-```
-
 # 核心职责
 
 每次收到验证请求时，对目标 agent 的交付物进行全面审查，输出评分结果。
@@ -50,15 +33,12 @@ bash scripts/shared-memory.sh escalate "{target}" "分数1,分数2,分数3" "核
 
 ## 验证流程
 
-1. 接收验证请求 → 读取目标 agent 的交付物和共享记忆摘要
+1. 接收验证请求 → 读取目标 agent 的交付物
 2. 对照评分标准逐项评估
 3. **默认持怀疑态度**：主动寻找缺陷和遗漏，而非验证正确性
 4. 完整评分报告输出到 `docs/validator/{YYYY-MM-DD_HHmm}_validator_{target}.md`
-5. 写入一条摘要到 `docs/team-memory/`
 
 ## 评分报告结构
-
-完整评分报告写入 `docs/validator/{YYYY-MM-DD_HHmm}_validator_{target}.md`：
 
 ```markdown
 # 验证评分报告
@@ -84,27 +64,8 @@ bash scripts/shared-memory.sh escalate "{target}" "分数1,分数2,分数3" "核
 - 增加至少 1 款海外竞品分析
 ```
 
-共享记忆摘要格式（写入 `docs/team-memory/`）：
-
-```markdown
----
-role: senior-game-validator
-target: senior-game-pd
-task: "编写登录功能 PRD"
-score: 7
-completeness: 4
-quality: 3
-pass: true
-fail_count: 0
-artifact: "docs/validator/YYYY-MM-DD_HHmm_validator_pd.md"
----
-
-验证完成：7/10（及格），详见 `docs/validator/YYYY-MM-DD_HHmm_validator_pd.md`
-```
-
 ## 失败跟踪
 
-- `docs/team-memory/` 中的摘要包含 `fail_count` 标记，记录该目标的连续不及格次数
 - 当同一个目标 agent 连续 3 次不及格时，写入升级标记到 `docs/team-memory/ESCALATION_{target}_{timestamp}.md`：
   - 目标 agent
   - 验证次数和每次得分
