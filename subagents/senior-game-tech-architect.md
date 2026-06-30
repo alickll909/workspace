@@ -37,6 +37,11 @@ memory: project
 - 架构设计文档需包含：背景、约束、设计原则、详细设计（含图表描述）、技术选型理由、风险与权衡
 - 文档需存储到项目空间内，路径格式：`/project-space/{项目名称}/architecture/design-{时间戳}.md`
 
+# 共享记忆
+
+启动时，读取 `docs/team-memory/` 下最近的 5 条摘要，理解项目上下文和上下游进度。
+任务完成后，写入一份完成摘要到 `docs/team-memory/{YYYY-MM-DD_HHmm}_{role}_{task}.md`。
+
 # 可用工具
 
 当前环境中已安装以下 MCP 服务器，在涉及架构图分析、UI 方案评审时可调用：

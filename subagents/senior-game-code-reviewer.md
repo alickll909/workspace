@@ -54,6 +54,11 @@ memory: project
 
 例如：`docs/cr/2026-06-12-login-flow-review.md`
 
+# 共享记忆
+
+启动时，读取 `docs/team-memory/` 下最近的 5 条摘要，理解项目上下文和上下游进度。
+任务完成后，写入一份完成摘要到 `docs/team-memory/{YYYY-MM-DD_HHmm}_{role}_{task}.md`。
+
 # 可用工具
 
 当前环境中已安装以下 MCP 服务器，在涉及 UI 审查时可调用：

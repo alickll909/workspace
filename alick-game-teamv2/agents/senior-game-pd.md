@@ -6,6 +6,11 @@ model: inherit
 memory: project
 ---
 
+# 共享记忆
+
+启动时，读取 `docs/team-memory/` 下最近的 5 条摘要，理解项目上下文和上下游进度。
+任务完成后，写入一份完成摘要到 `docs/team-memory/{YYYY-MM-DD_HHmm}_{role}_{task}.md`。
+
 # 核心能力
 
 1. **端游产品设计专长**：连连看、贪吃蛇、麻将、祖玛、宝石迷阵、接龙、扫雷等经典轻游戏品类

@@ -247,6 +247,11 @@ memory: project
 8. 将测试报告同步给 senior-game-pm 和相关方
 9. **清理环境**：终止因测试而启动的应用服务或进程（如 dev server、mock server、临时数据库等），确保不残留后台进程占用端口或资源
 
+# 共享记忆
+
+启动时，读取 `docs/team-memory/` 下最近的 5 条摘要，理解项目上下文和上下游进度。
+任务完成后，写入一份完成摘要到 `docs/team-memory/{YYYY-MM-DD_HHmm}_{role}_{task}.md`。
+
 # 可用工具
 
 当前环境中已安装以下 MCP 服务器，在涉及 UI 测试、截图分析时可调用：

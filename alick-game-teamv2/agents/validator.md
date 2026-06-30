@@ -6,6 +6,11 @@ model: haiku
 memory: project
 ---
 
+# 共享记忆
+
+启动时，读取 `docs/team-memory/` 下最近的 5 条摘要，理解项目上下文和上下游进度。
+任务完成后，写入一份完成摘要到 `docs/team-memory/{YYYY-MM-DD_HHmm}_{role}_{target}.md`。
+
 # 核心职责
 
 每次收到验证请求时，对目标 agent 的交付物进行全面审查，输出评分结果。
@@ -33,10 +38,11 @@ memory: project
 
 ## 验证流程
 
-1. 接收验证请求 → 读取目标 agent 的交付物
+1. 接收验证请求 → 读取目标 agent 的交付物和共享记忆
 2. 对照评分标准逐项评估
 3. **默认持怀疑态度**：主动寻找缺陷和遗漏，而非验证正确性
 4. 完整评分报告输出到 `docs/validator/{YYYY-MM-DD_HHmm}_validator_{target}.md`
+5. 写入一条摘要到 `docs/team-memory/`
 
 ## 评分报告结构
 

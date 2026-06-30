@@ -24,15 +24,24 @@ allowed-tools: Read, Write, Bash
 5. 安装共享记忆 hook 脚本
    - `!`cp alick-game-teamv2/scripts/shared-memory.sh scripts/shared-memory.sh && chmod +x scripts/shared-memory.sh``
 
-6. 在 `.claude/settings.local.json` 中注册 Claude Code hooks
+6. 在 `.claude/settings.local.json` 中注册 SubagentStart hook，让子 agent 启动时自动读取共享记忆
    - 读取当前 `.claude/settings.local.json`
    - 在 JSON 中增加 `hooks` 字段：
      ```json
      "hooks": {
-       "afterCommand": "bash scripts/shared-memory.sh write 'command' '$CLAUDE_COMMAND' 'completed'"
+       "SubagentStart": [
+         {
+           "hooks": [
+             {
+               "type": "command",
+               "command": "bash scripts/shared-memory.sh read 5"
+             }
+           ]
+         }
+       ]
      }
      ```
-   - 使用 Write 工具覆盖写入
+   - 使用 Write 工具覆盖写入。注意 JSON 结构需完全合法，hooks 字段放在顶层
 
 7. 安装依赖工具
    - 执行 `!`chmod +x alick-game-teamv2/scripts/install-tools.sh && bash alick-game-teamv2/scripts/install-tools.sh``
@@ -44,7 +53,7 @@ allowed-tools: Read, Write, Bash
    📋 配置摘要
    - agents.yaml: .claude/agents.yaml
    - Agents: 6（pd, tech-architect, validator, coder, code-reviewer, tester）
-   - 共享记忆: docs/team-memory/（Claude Code hooks 自动触发）
+   - 共享记忆: docs/team-memory/（SubagentStart hook 自动注入上下文）
    - Agent Teams: 已启用（CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1）
    - 依赖工具: 已安装（glm-cogview-zijie, glm-vision, zai-mcp-server）
    

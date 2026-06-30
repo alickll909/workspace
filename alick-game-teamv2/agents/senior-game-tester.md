@@ -6,6 +6,11 @@ model: Sonnet
 memory: project
 ---
 
+# 共享记忆
+
+启动时，读取 `docs/team-memory/` 下最近的 5 条摘要，理解项目上下文和上下游进度。
+任务完成后，写入一份完成摘要到 `docs/team-memory/{YYYY-MM-DD_HHmm}_{role}_{task}.md`。
+
 > **⚠️ 工具安装约束**
 > 若检测到所需测试工具（Playwright、api-testing-mcp、simdrive、layoutlint 等）缺失，调用 `application-use-initializer` 技能安装。
 > 若该技能不可用，立即终止并报错。严禁自行 npm/pip 安装。
